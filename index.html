@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="./crypt_lib/Plain.js"></script>
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+	padding-top: 30px;
+	padding-right: 300px;
+	padding-bottom: 50px;
+	padding-left: 300px;
+}
+
+.para {
+	border-style: ridge;
+	padding-top: 10px;
+	padding-right: 20px;
+	padding-bottom: 10px;
+	padding-left: 20px;
+}
+
+/* Create two equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+</head>
+
+<body>
+
+<h2>Cryptography</h2>
+
+<p>This website is using my self-written cryptography library to run different kinds of cryptography</p>
+<p id="types">
+Cryptography system:
+<select id="selection" onchange="initParameters()"></select>
+</p>
+
+<div id="parameters" class="para"></div>
+<div class="row">
+<div class="column">
+<div>
+<p>Plaintext</p>
+<textarea rows="10" cols="50" id="e_plaintext">
+Here is the plain text.
+</textarea>
+
+<p>Encrypted Text</p>
+<textarea rows="10" cols="50" id="e_ciphertext">
+...
+</textarea>
+</div>
+
+<p>
+<button type="button" onclick="encrypt_generate()">Generate</button>
+</p>
+</div>
+
+<div class="column">
+<div>
+<p>Encrypted Text</p>
+<textarea rows="10" cols="50" id="d_ciphertext">
+Here is the ciphertext.
+</textarea>
+
+<p>Plaintext</p>
+<textarea rows="10" cols="50" id="d_plaintext">
+...
+</textarea>
+</div>
+
+<p>
+<button type="button" onclick="decrypt_generate()">Generate</button>
+</p>
+</div>
+</div>
+<p>All cryptography system is based on the book Cryptography Theory and Practice by Douglas R Stinson.</p>
+<script src="./preload.js"></script>
+
+</body>
+</html>
+
+
