@@ -1,6 +1,7 @@
 var crypt_types = [
 	"Plain",
-	"ShiftCipher"
+	"ShiftCipher",
+	"Substitution"
 ];
 
 function genOptions(selection){
@@ -24,6 +25,9 @@ function initParameters(){
 	}
 	else if(select == crypt_types[1]){
 		cipher = new Rot(parameter_division)
+	}
+	else if(select == crypt_types[2]){
+		cipher = new Substitution(parameter_division)
 	}
 }
 
