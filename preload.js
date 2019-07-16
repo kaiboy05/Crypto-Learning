@@ -1,5 +1,6 @@
 var crypt_types = [
-	"Plain"
+	"Plain",
+	"ShiftCipher"
 ];
 
 function genOptions(selection){
@@ -21,6 +22,9 @@ function initParameters(){
 	if(select == crypt_types[0]){
 		cipher = new Plain(parameter_division)
 	}
+	else if(select == crypt_types[1]){
+		cipher = new Rot(parameter_division)
+	}
 }
 
 function encrypt_generate(){
@@ -38,5 +42,4 @@ function decrypt_generate(){
 }
 
 genOptions(selection);
-
 
