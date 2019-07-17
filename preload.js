@@ -1,7 +1,8 @@
 var crypt_types = [
 	"Plain",
 	"ShiftCipher",
-	"Substitution"
+	"Substitution",
+	"Affine"
 ];
 
 function genOptions(selection){
@@ -28,6 +29,9 @@ function initParameters(){
 	}
 	else if(select == crypt_types[2]){
 		cipher = new Substitution(parameter_division)
+	}
+	else if(select == crypt_types[3]){
+		cipher = new Affine(parameter_division)
 	}
 }
 

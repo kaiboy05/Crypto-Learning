@@ -45,16 +45,14 @@ class Substitution{
 	}
 
 	initDiv(){
-		var para = document.createElement("p");
 		var node = document.createTextNode("Key (first 26 characters)");
 		var keyinput = document.createElement("textarea");
 		keyinput.id = "key1";
 		keyinput.cols="50";
 		keyinput.rows="1";
 
-		para.appendChild(node);
-
-		this.para_div.appendChild(para);
+		this.para_div.appendChild(node);
+		this.para_div.appendChild(document.createElement('br'))
 		this.para_div.appendChild(keyinput);
 	}
 }
