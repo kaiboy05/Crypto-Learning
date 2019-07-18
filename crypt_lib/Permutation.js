@@ -12,10 +12,8 @@ class Permutation{
 		for(var i = 0; i < new_length; i++){
 			var r = i % this.pad;
 			var d = (i - r) / this.pad;
-			console.log(d, r, d + this.permutation[r]);
 			var tochange = ptext[d * this.pad + this.permutation[r]];
 			if(tochange){
-				console.log(tochange);
 				result += tochange;
 			}
 			else{
@@ -29,14 +27,11 @@ class Permutation{
 		var result = '';
 		this.inverse = this.getpermutation_inv();
 		var new_length = ctext.length - (ctext.length % this.pad) + this.pad;
-		console.log(this.inverse);
 		for(var i = 0; i < new_length; i++){
 			var r = i % this.pad;
 			var d = (i - r) / this.pad;
-			console.log(d, r, d + this.inverse[r]);
 			var tochange = ctext[d * this.pad + this.inverse[r]];
 			if(tochange){
-				console.log(tochange);
 				result += tochange;
 			}
 			else{
