@@ -1,8 +1,9 @@
 var crypt_types = [
 	"Plain",
-	"ShiftCipher",
+	"Rot",
 	"Substitution",
-	"Affine"
+	"Affine",
+	"Vigenere"
 ];
 
 function genOptions(selection){
@@ -21,30 +22,24 @@ var cipher;
 
 function initParameters(){
 	var select = selection.value;
-	if(select == crypt_types[0]){
-		cipher = new Plain(parameter_division)
-	}
-	else if(select == crypt_types[1]){
-		cipher = new Rot(parameter_division)
-	}
-	else if(select == crypt_types[2]){
-		cipher = new Substitution(parameter_division)
-	}
-	else if(select == crypt_types[3]){
-		cipher = new Affine(parameter_division)
+
+	for(var i = 0; i < crypt_types.length; i++){
+		if(select == crypt_types[i]){
+			cipher = eval("new " + crypt_types[i] + "(parameter_division)");
+		}
 	}
 }
 
 function encrypt_generate(){
 	var ptext = document.getElementById("e_plaintext").value;
-	cipher.getparameters()
+	cipher.getparameters();
 	var ctext = cipher.encrypt(ptext);
 	document.getElementById("e_ciphertext").value = ctext;
 }
 
 function decrypt_generate(){
 	var ctext = document.getElementById("d_ciphertext").value;
-	cipher.getparameters()
+	cipher.getparameters();
 	var ptext = cipher.decrypt(ctext);
 	document.getElementById("d_plaintext").value = ptext;
 }
