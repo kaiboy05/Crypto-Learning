@@ -19,12 +19,21 @@ class Plain{
 	}
 
 	initDiv(){
-		var para = document.createElement("p");
 		var node = document.createTextNode("No parameters")
-		para.appendChild(node)
 
-		this.para_div.appendChild(node)
+		this.para_div.appendChild(document.createTextNode(this.name));
+		this.para_div.appendChild(document.createElement('br'));
+		this.para_div.appendChild(node);
+		this.para_div.appendChild(document.createElement('br'));
 	}
+}
+
+function getchar(num){
+	console.log(num);
+	num = num % 26
+	console.log(num);
+	num = num < 0 ? num + 26 : num
+	return String.fromCharCode('a'.charCodeAt(0) + num);
 }
 
 // class Basic{

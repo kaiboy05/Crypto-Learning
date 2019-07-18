@@ -51,8 +51,10 @@ class Substitution{
 		keyinput.cols="50";
 		keyinput.rows="1";
 
+		this.para_div.appendChild(document.createTextNode(this.name));
+		this.para_div.appendChild(document.createElement('br'));
 		this.para_div.appendChild(node);
-		this.para_div.appendChild(document.createElement('br'))
+		this.para_div.appendChild(document.createElement('br'));
 		this.para_div.appendChild(keyinput);
 	}
 }
