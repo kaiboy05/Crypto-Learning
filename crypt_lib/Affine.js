@@ -87,8 +87,9 @@ class Affine{
 			keyinput2.appendChild(option);
 		}
 
-		this.para_div.appendChild(document.createTextNode(this.name));
-		this.para_div.appendChild(document.createElement('br'));
+		var header = document.createElement('p');
+		header.appendChild(document.createTextNode(this.name))
+		this.para_div.appendChild(header);
 		this.para_div.appendChild(node0);
 		this.para_div.appendChild(document.createElement('br'));
 		this.para_div.appendChild(node1);

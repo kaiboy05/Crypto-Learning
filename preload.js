@@ -3,7 +3,8 @@ var crypt_types = [
 	"Rot",
 	"Substitution",
 	"Affine",
-	"Vigenere"
+	"Vigenere",
+	"Permutation"
 ];
 
 function genOptions(selection){
