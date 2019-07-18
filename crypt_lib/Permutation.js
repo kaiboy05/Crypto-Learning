@@ -7,18 +7,49 @@ class Permutation{
 	}
 
 	encrypt(ptext){
-		return ptext;
+		var result = '';
+		var new_length = ptext.length - (ptext.length % this.pad) + this.pad;
+		for(var i = 0; i < new_length; i++){
+			var r = i % this.pad;
+			var d = (i - r) / this.pad;
+			console.log(d, r, d + this.permutation[r]);
+			var tochange = ptext[d * this.pad + this.permutation[r]];
+			if(tochange){
+				console.log(tochange);
+				result += tochange;
+			}
+			else{
+				result += ' '
+			}
+		}
+		return result;
 	}
 
 	decrypt(ctext){
-		return ctext;
+		var result = '';
+		this.inverse = this.getpermutation_inv();
+		var new_length = ctext.length - (ctext.length % this.pad) + this.pad;
+		console.log(this.inverse);
+		for(var i = 0; i < new_length; i++){
+			var r = i % this.pad;
+			var d = (i - r) / this.pad;
+			console.log(d, r, d + this.inverse[r]);
+			var tochange = ctext[d * this.pad + this.inverse[r]];
+			if(tochange){
+				console.log(tochange);
+				result += tochange;
+			}
+			else{
+				result += ' '
+			}
+		}
+		return result;
 	}
 
 	getparameters(){
 		this.pad = parseInt(document.getElementById('key1').value, 10);
 		this.pos = parseInt(document.getElementById('key2').value, 10);
 		this.permutation = this.getpermutation(this.pad, this.pos);
-		console.log(this.permutation);
 	}
 
 	getpermutation(pad, pos){
@@ -29,7 +60,20 @@ class Permutation{
 		var help = this.getpermutation_help(pad - 1, pos);
 		var result = [];
 		for(var i = 0; i < pad; i++){
-			result.push(temp.splice(help[i], 1));
+			result.push(temp.splice(help[i], 1)[0]);
+		}
+		return result;
+	}
+
+	getpermutation_inv(){
+		var result = [];
+		for(var i = 0; i < this.permutation.length; i++){
+			for(var j = 0; j < this.permutation.length; j++){
+				if(this.permutation[j] == i){
+					result.push(j);
+					break;
+				}
+			}
 		}
 		return result;
 	}
