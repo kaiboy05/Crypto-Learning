@@ -3,28 +3,25 @@ class Affine{
 		this.name = "Affine Cipher";
 		this.para_div = division;
 		division.innerHTML = '';
+		this.coprimes = [1, 3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25];
+		this.inv = [1, 9, -5, -11, 3, -7, 7, -3, 11, -9, -1];
 		this.initDiv();
 	}
 
-	getchar(num){
-		num = num % 26
-		num = num < 0 ? num + 26 : num
-		return String.fromCharCode('a'.charCodeAt(0) + num);
-	}
-
 	encrypt(ptext){
-		return ptext;
+		var a = this.a
+		var b = this.b
 		return ptext.split('').map(function(c){
 			var n = c.charCodeAt(0);
 			if(n - 'a'.charCodeAt(0) < 26 && n - 'a'.charCodeAt(0) >= 0){
 				n = n - 'a'.charCodeAt(0);
-				n = (n + key) % 26;
-				return String.fromCharCode(n + 'a'.charCodeAt(0));
+				var result = getchar(a * n + b)
+				return result;
 			}
 			else if(n - 'A'.charCodeAt(0) < 26 && n - 'A'.charCodeAt(0) >= 0){
 				n = n - 'A'.charCodeAt(0);
-				n = (n + key) % 26;
-				return String.fromCharCode(n + 'A'.charCodeAt(0));
+				var result = getchar(a * n + b)
+				return result.toUpperCase();
 			}
 			else{
 				return c;
@@ -33,24 +30,20 @@ class Affine{
 	}
 
 	decrypt(ctext){
-		return ctext;
+		var a = this.a
+		var b = this.b
+		var inverse = this.getinverse(a);
 		return ctext.split('').map(function(c){
 			var n = c.charCodeAt(0);
 			if(n - 'a'.charCodeAt(0) < 26 && n - 'a'.charCodeAt(0) >= 0){
 				n = n - 'a'.charCodeAt(0);
-				n = (n - key) % 26;
-				if(n < 0){
-					n += 26;
-				}
-				return String.fromCharCode(n + 'a'.charCodeAt(0));
+				var result = getchar((n - b) * inverse)
+				return result;
 			}
 			else if(n - 'A'.charCodeAt(0) < 26 && n - 'A'.charCodeAt(0) >= 0){
 				n = n - 'A'.charCodeAt(0);
-				n = (n - key) % 26;
-				if(n < 0){
-					n += 26;
-				}
-				return String.fromCharCode(n + 'A'.charCodeAt(0));
+				var result = getchar((n - b) * inverse)
+				return result.toUpperCase();
 			}
 			else{
 				return c;
@@ -59,7 +52,16 @@ class Affine{
 	}
 
 	getparameters(){
+		this.a = parseInt(document.getElementById('key1').value, 10);
+		this.b = parseInt(document.getElementById('key2').value, 10);
+	}
 
+	getinverse(num){
+		for(var i = 0; i < this.coprimes.length; i++){
+			if(this.coprimes[i] == num){
+				return this.inv[i];
+			}
+		}
 	}
 
 	initDiv(){
@@ -68,11 +70,10 @@ class Affine{
 		var node1 = document.createTextNode("a: 	");
 		var keyinput = document.createElement("select");
 		keyinput.id = "key1";
-		var coprimes = [1, 3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25]
-		for (var i = 0; i < coprimes.length; i++) {
+		for (var i = 0; i < this.coprimes.length; i++) {
 			var option = document.createElement("option");
-			option.value = coprimes[i];
-			option.text = coprimes[i];
+			option.value = this.coprimes[i];
+			option.text = this.coprimes[i];
 			keyinput.appendChild(option);
 		}
 
@@ -95,4 +96,12 @@ class Affine{
 		this.para_div.appendChild(keyinput2);
 
 	}
+}
+
+function getchar(num){
+	console.log(num);
+	num = num % 26
+	console.log(num);
+	num = num < 0 ? num + 26 : num
+	return String.fromCharCode('a'.charCodeAt(0) + num);
 }
